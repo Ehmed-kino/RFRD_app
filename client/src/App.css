@@ -1,0 +1,14 @@
+.App {
+  text-align: left;
+}
+
+input {
+  margin-left:5px;
+  margin-right:5px;
+  margin-top:10px;
+}
+
+span {
+  display:inline-block;
+  width:185px;
+}

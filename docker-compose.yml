@@ -1,0 +1,29 @@
+version: '2'
+services:
+  redis:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - /redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+  web:
+    build: ./server
+    working_dir: /var/www/app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/var/www/app:rw
+    depends_on:
+      - redis
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - './client/:/usr/src/app'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
